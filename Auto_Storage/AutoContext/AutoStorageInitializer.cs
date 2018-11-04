@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace Auto_Storage.AutoContext
 {
-    class AutoStorageInitializer : DropCreateDatabaseAlways<AutoStorageContext>
+    class AutoStorageInitializer : CreateDatabaseIfNotExists<AutoStorageContext>
     {
         protected override void Seed(AutoStorageContext db)
         {
