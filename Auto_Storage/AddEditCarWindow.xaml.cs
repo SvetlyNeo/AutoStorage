@@ -120,18 +120,25 @@ namespace Auto_Storage
 
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
         {
-            using (AutoStorageContext db = new AutoStorageContext())
+            if (cbAddManuf.Text == "" || cbAddMark.Text == "" || addCarModel.Text == "" || addCarPower.Text == "" || addCarAcceleration.Text == "" || addCarConsumption.Text == "" || addCarSpeed.Text == "" || addCarPrice.Text == "")
             {
-                Car car = db.Cars.Find(_car.Id);
-                car.Model = addCarModel.Text;
-                car.Power = int.Parse(addCarPower.Text);
-                car.Acceleration = double.Parse(addCarAcceleration.Text);
-                car.Consumption = double.Parse(addCarConsumption.Text);
-                car.MaxSpeed = int.Parse(addCarSpeed.Text);
-                car.Price = int.Parse(addCarPrice.Text);
-                db.SaveChanges();
+                MessageBox.Show("Заполните все поля!");
             }
-            this.Close();
+            else
+            {
+                using (AutoStorageContext db = new AutoStorageContext())
+                {
+                    Car car = db.Cars.Find(_car.Id);
+                    car.Model = addCarModel.Text;
+                    car.Power = int.Parse(addCarPower.Text);
+                    car.Acceleration = double.Parse(addCarAcceleration.Text);
+                    car.Consumption = double.Parse(addCarConsumption.Text);
+                    car.MaxSpeed = int.Parse(addCarSpeed.Text);
+                    car.Price = int.Parse(addCarPrice.Text);
+                    db.SaveChanges();
+                }
+                this.Close();
+            }
         }
 
         private void addCarSpeed_PreviewTextInput(object sender, TextCompositionEventArgs e)
